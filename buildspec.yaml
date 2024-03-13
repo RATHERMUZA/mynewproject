@@ -1,1 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - npm install -g aws-cli
+
+  build:
+    commands:
+      - aws s3 sync . s3://your-bucket-name --delete
+      # Replace 'your-bucket-name' with the name of your S3 bucket
+      # This command syncs the contents of your local directory with the S3 bucket, 
+      # deleting any files in the bucket that are not present locally.
+      # You may want to customize this command based on your project directory structure.
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: '.' # Set the base directory to the root of your project
 
